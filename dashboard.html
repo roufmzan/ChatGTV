@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGTV Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="p-6">
+        <h1 class="text-3xl">ChatGTV</h1>
+        
+        <!-- Kategori -->
+        <div class="flex space-x-3 mt-6 overflow-x-auto">
+            <button class="category-btn active" onclick="selectCategory('all', this)">All</button>
+            <button class="category-btn" onclick="selectCategory('AI', this)">AI</button>
+            <button class="category-btn" onclick="selectCategory('Bots', this)">Bots</button>
+            <button class="category-btn" onclick="selectCategory('Favorites', this)">Favorites</button>
+        </div>
+
+        <!-- Daftar AI -->
+        <div class="mt-6 space-y-5" id="ai-list">
+            <div class="ai-item" data-category="AI">
+                <div class="flex items-center space-x-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Meta_Platforms_Inc._logo.svg">
+                    <div>
+                        <p class="font-semibold">META.AI</p>
+                        <p class="text-sm">1d</p>
+                    </div>
+                </div>
+                <a href="https://meta.ai/chat" class="bg-black">Start</a>
+            </div>
+            <div class="ai-item" data-category="AI">
+                <div class="flex items-center space-x-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg">
+                    <div>
+                        <p class="font-semibold">ChatGPT</p>
+                        <p class="text-sm">ChatGPT membantu Anda mendapatkan jawaban</p>
+                    </div>
+                </div>
+                <a href="https://chat.openai.com" class="bg-black">Start</a>
+            </div>
+            <div class="ai-item" data-category="Bots">
+                <div class="flex items-center space-x-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Google_Gemini_%282023%29.svg/1200px-Google_Gemini_%282023%29.svg.png">
+                    <div>
+                        <p class="font-semibold">GEMINI</p>
+                        <p class="text-sm">2d</p>
+                    </div>
+                </div>
+                <a href="https://gemini.google.com" class="bg-black">Start</a>
+            </div>
+            <div class="ai-item" data-category="Favorites">
+                <div class="flex items-center space-x-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Anthropic_Claude_logo.svg">
+                    <div>
+                        <p class="font-semibold">Claude.AI</p>
+                        <p class="text-sm">5d</p>
+                    </div>
+                </div>
+                <a href="https://claude.ai" class="bg-black">Start</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar Bawah -->
+    <div class="fixed">
+        <button class="nav-btn active">📩</button>
+        <button class="nav-btn">🔍</button>
+        <button class="nav-btn">➕</button>
+        <button class="nav-btn relative">🔔<span class="absolute">5</span></button>
+        <button class="nav-btn">👤</button>
+    </div>
+
+    <!-- Script Filter Kategori -->
+    <script>
+        function selectCategory(category, btn) {
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            document.querySelectorAll('.ai-item').forEach(item => {
+                item.style.display = category === 'all' || item.getAttribute('data-category') === category ? 'flex' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
