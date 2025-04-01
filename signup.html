@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGTV Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md relative">
+        <button onclick="history.back()" class="absolute left-4 top-4 text-black text-2xl">&larr;</button>
+        <h2 class="text-2xl font-bold text-center">ChatGTV</h2>
+        <p class="text-center text-gray-600 mt-2">Create an account</p>
+        <p class="text-center text-sm text-gray-500">Enter your email to sign up to this app</p>
+        
+        <form class="mt-6" action="verify.html" method="POST">
+            <input type="email" name="email" placeholder="email@domain.com" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-black" required>
+            
+            <button type="submit" class="w-full bg-black text-white py-2 rounded-md mt-4">Continue</button>
+        </form>
+        
+        <div class="flex items-center my-4">
+            <hr class="flex-grow border-gray-300">
+            <span class="mx-2 text-gray-500">or</span>
+            <hr class="flex-grow border-gray-300">
+        </div>
+        
+        <a href="google-auth.html" class="w-full flex items-center justify-center bg-white border py-2 rounded-md mb-2">
+            <img src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" class="w-5 h-5 mr-2"> Continue with Google
+        </a>
+        
+        <a href="apple-auth.html" class="w-full flex items-center justify-center bg-white border py-2 rounded-md">
+            <img src="https://www.svgrepo.com/show/475647/apple-color.svg" class="w-5 h-5 mr-2"> Continue with Apple
+        </a>
+        
+        <p class="text-xs text-gray-500 text-center mt-4">
+            By clicking continue, you agree to our 
+            <a href="terms.html" class="text-black">Terms of Service</a> and 
+            <a href="privacy.html" class="text-black">Privacy Policy</a>
+        </p>
+    </div>
+</body>
+</html>

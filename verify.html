@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi OTP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md relative">
+        <button onclick="history.back()" class="absolute left-4 top-4 text-black text-2xl">&larr;</button>
+        
+        <h2 class="text-2xl font-bold text-center">Verifikasi dengan Email</h2>
+        <p class="text-center text-gray-600 mt-2">Masukkan kode OTP yang telah dikirim ke</p>
+        <p class="text-center text-sm text-blue-600">email@domain.com</p>
+
+        <form id="otpForm" class="mt-6">
+            <div class="flex justify-between space-x-2">
+                <input type="text" class="otp-input w-12 h-12 text-center text-2xl border rounded-md focus:ring-2 focus:ring-black" maxlength="1" required>
+                <input type="text" class="otp-input w-12 h-12 text-center text-2xl border rounded-md focus:ring-2 focus:ring-black" maxlength="1" required>
+                <input type="text" class="otp-input w-12 h-12 text-center text-2xl border rounded-md focus:ring-2 focus:ring-black" maxlength="1" required>
+                <input type="text" class="otp-input w-12 h-12 text-center text-2xl border rounded-md focus:ring-2 focus:ring-black" maxlength="1" required>
+                <input type="text" class="otp-input w-12 h-12 text-center text-2xl border rounded-md focus:ring-2 focus:ring-black" maxlength="1" required>
+                <input type="text" class="otp-input w-12 h-12 text-center text-2xl border rounded-md focus:ring-2 focus:ring-black" maxlength="1" required>
+            </div>
+
+            <p class="text-center text-sm text-gray-500 mt-4">
+                Tidak menerima OTP? <a href="#" class="text-blue-600">Kirim Ulang</a>
+            </p>
+
+            <button type="submit" class="w-full bg-black text-white py-2 rounded-md mt-4">Verifikasi</button>
+            <p id="errorMsg" class="text-center text-red-500 text-sm mt-2 hidden">Kode OTP salah, coba lagi!</p>
+            
+            <div id="loading" class="hidden text-center mt-4">
+                <p class="text-sm text-gray-600">Memverifikasi...</p>
+                <div class="animate-spin rounded-full h-6 w-6 border-t-2 border-black mx-auto mt-2"></div>
+            </div>
+        </form>
+
+        <p class="text-xs text-gray-500 text-center mt-4">
+            Kamu memiliki <span class="text-black font-semibold">3</span> kali kesempatan untuk memasukkan Kode OTP.
+        </p>
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll(".otp-input");
+        const otpForm = document.getElementById("otpForm");
+        const errorMsg = document.getElementById("errorMsg");
+        const loading = document.getElementById("loading");
+
+        inputs.forEach((input, index) => {
+            input.addEventListener("input", (e) => {
+                if (!/^\d*$/.test(e.target.value)) {
+                    e.target.value = "";
+                    return;
+                }
+
+                if (e.target.value && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Backspace" && !input.value && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+
+        otpForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            let otpCode = "";
+            inputs.forEach(input => otpCode += input.value);
+
+            if (otpCode === "123456") { // OTP yang benar
+                loading.classList.remove("hidden");
+                errorMsg.classList.add("hidden");
+
+                // Simpan status login di sessionStorage
+                sessionStorage.setItem("isLoggedIn", "true");
+
+                setTimeout(() => {
+                    window.location.href = "dashboard.html"; // Redirect ke dashboard
+                }, 2000);
+            } else {
+                errorMsg.classList.remove("hidden");
+                inputs.forEach(input => input.value = "");
+                inputs[0].focus();
+            }
+        });
+    </script>
+</body>
+</html>
